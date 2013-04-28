@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<widget
+		xmlns       = "http://www.w3.org/ns/widgets"
+		xmlns:gap   = "http://phonegap.com/ns/1.0"
+		id          = "org.potipoti.coords"
+		version     = "1.0.0"
+	>
+
+	<name>
+		GPS Coordinates Converter
+	</name>
+
+	<description>
+		This app converts coordinates.
+	</description>
+
+	<author
+		href="http://jpetit.potipoti.org"
+		email="jordi.petit@gmail.com"
+	>
+		Jordi Petit
+	</author>
+
+	<gap:platforms>
+		<gap:platform name="android" minVersion="2.1" />
+		<gap:platform name="blackberry" project="widgets"/>
+	</gap:platforms>
+
+	<icon src="icon.png" gap:role="default" />
+
+	<gap:splash src="splash.png" />
+
+	<preference name="android-installLocation" value="auto" />
+
+	<feature name="http://api.phonegap.com/1.0/geolocation"/>
+	<feature name="http://api.phonegap.com/1.0/network"/>
+	<feature name="http://api.phonegap.com/1.0/device"/>
+
+	<access origin="http://google.com" />
+	<access origin="https://google.com" />
+
+ </widget>
+
