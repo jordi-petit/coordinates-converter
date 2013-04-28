@@ -32,13 +32,17 @@ html
 			div(data-role='content')		
 				p Coordinates:		
 				input(name='coords', id='coords', data-clear-btn='true', value='')
-				input(type='button', name='convert', value='Convert', onclick='convert_button()')
-				input(name='coords_d', id='coords_d', value='', disabled='disabled')
-				input(name='coords_dm', id='coords_dm', value='', disabled='disabled')
-				input(name='coords_dms', id='coords_dms', value='', disabled='disabled')
-				input(name='coords_utm', id='coords_utm', value='', disabled='disabled')
-				input(type='button', name='view', value='View', onclick='view_button()')
+				input(type='button', id='convert', name='convert', value='Convert', onclick='convert_button()')
+				br
+				input(name='coords_d', id='coords_d', value='')
+				input(name='coords_dm', id='coords_dm', value='')
+				input(name='coords_dms', id='coords_dms', value='')
+				input(name='coords_utm', id='coords_utm', value='')
+				input(type='button', id='view', name='view', value='View', disabled='disabled', onclick='view_button()')
+			script(type='text/javascript')
+				init()
 
+					
 		div(data-role='page', id='info')
 			div(data-role='header')
 				a(href='#', data-icon='back', data-iconpos='notext', data-rel='back') 
