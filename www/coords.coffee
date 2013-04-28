@@ -24,25 +24,20 @@ to_dm = (lat, lon) ->
 	lat + " " + lon
 to_dms = (lat, lon) ->
 	"?"
-view_button = ->
-	gps = document.f.gps_d.value.trim()
-	window.location = "https://maps.google.com/maps?hl=ca&q=" + gps
+to_utm = (lat, lon) ->
+	"?"
 
 
 
 
 parse = (input) ->
-	lat = undefined
-	lon = undefined
-	m = undefined
-
 	# 42.53 -4.56
-	re = /\s*(-?\d+\.\d+)\s*(-?\d+\.\d+)\s*/
+	re = /\s*([-+]?\d+(\.(\d+)?)?)\s*([-+]?\d+(\.(\d+)?)?)\s*/
 	m = re.exec(input)
-	console.log m
 	if m
+		console.log m
 		lat = parseFloat(m[1])
-		lon = parseFloat(m[2])
+		lon = parseFloat(m[4])
 		return (
 			lat: lat
 			lon: lon
@@ -51,7 +46,6 @@ parse = (input) ->
 	# n42.53 w4.56
 	re = /\s*([ns])\s*(\d+\.\d+)\s*([ew])\s*(\d+\.\d+)\s*/
 	m = re.exec(input)
-	console.log m
 	if m
 		lat = parseFloat(m[2])
 		lon = parseFloat(m[4])
@@ -65,7 +59,6 @@ parse = (input) ->
 	# w4.56 n42.53
 	re = /\s*([ew])\s*(\d+\.\d+)\s*([ns])\s*(\d+\.\d+)\s*/
 	m = re.exec(input)
-	console.log m
 	if m
 		lat = parseFloat(m[4])
 		lon = parseFloat(m[2])
@@ -80,9 +73,25 @@ parse = (input) ->
 	return null
 
 
+view_button = ->
+	txt = $("#coords_d").textinput().val().trim().toLowerCase()
+	window.location = "https://maps.google.com/maps?hl=ca&q=" + txt
+
 
 convert_button = ->
 	input = $("#coords").textinput().val().trim().toLowerCase()
+	res = parse(input)
+	lat = res.lat
+	lon = res.lon
+	$("#coords_d").textinput().val(to_d(lat, lon))
+	$("#coords_dm").textinput().val(to_dm(lat, lon))
+	$("#coords_dms").textinput().val(to_dms(lat, lon))
+	$("#coords_utm").textinput().val(to_utm(lat, lon))
+
+
+
+
+vell = ->
 	console.log input
 	console.log parse(input)
 	return
