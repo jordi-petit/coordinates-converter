@@ -15,12 +15,15 @@ html
 
 		link(rel='stylesheet', href='lib/jquery.mobile-1.3.1/jquery.mobile-1.3.1.min.css')
 		link(rel='stylesheet', href='lib/add2home/add2home.css')
-
+		
 		script(src='phonegap.js')
 		script(src='lib/jquery-1.9.1.min.js')
 		script(src='lib/jquery.mobile-1.3.1/jquery.mobile-1.3.1.min.js')
 		script(src='lib/add2home/add2home.js')
-		script(src='coords.js')
+
+		link(rel='stylesheet', href='style.css')
+
+		script(src='app.js')
 		script(src='conversions.js')
 
 	body
@@ -37,10 +40,10 @@ html
 						input(name='coords', id='coords', data-clear-btn='true', placeholder='Coordinates (app will guess their format!)')
 						input(type='button', id='convert', name='convert', value='Convert', onclick='convert_button()')
 					li
-						input(name='coords_d', id='coords_d', placeholder='Degrees')
-						input(name='coords_dm', id='coords_dm', placeholder='Degrees Minutes')
-						input(name='coords_dms', id='coords_dms', placeholder='Degrees Minutes Seconds')
-						input(name='coords_utm', id='coords_utm', placeholder='UTM - Not ready')
+						input(name='coords_d', id='coords_d', placeholder='Degrees.')
+						input(name='coords_dm', id='coords_dm', placeholder='Degrees Minutes.')
+						input(name='coords_dms', id='coords_dms', placeholder='Degrees Minutes Seconds.')
+						input(name='coords_utm', id='coords_utm', placeholder='UTM x, y')
 						input(type='button', id='view', name='view', value='View', disabled='disabled', onclick='view_button()')
 
 			div(data-role='footer', data-position='fixed')
@@ -73,7 +76,24 @@ html
 
 		div(data-role='page', id='configuration')
 			div(data-role='header')
-				a(href='#', data-icon='back', data-iconpos='notext', data-rel='back') 
+				a(href='#', data-icon='back', data-iconpos='notext', data-rel='back', onclick='update()') 
 				h1 Configuration
 			div(data-role='content')
-				p Bla bla configuration
+				ul(data-role='listview', data-divider-theme='c')					
+					li 
+						p.my-p Display unit symbols (°, ', ")
+						select(name='symbols', id='symbols', data-role='slider', data-mini='true')
+							option(value='1') Yes
+							option(value='0') No
+					li						
+						p.my-p Decimal digits for degrees
+						input(type='range', name='slider_d', id='slider_d', min='0', max='8', value='8')
+					li						
+						p.my-p Decimal digits for minutes
+						input(type='range', name='slider_m', id='slider_m', min='0', max='8', value='3')
+					li						
+						p.my-p Decimal digits for seconds
+						input(type='range', name='slider_s', id='slider_s', min='0', max='8', value='3')
+					li
+						p.my-p Decimal digits for UTM  
+						input(type='range', name='slider_utm', id='slider_utm', min='0', max='8', value='0')
