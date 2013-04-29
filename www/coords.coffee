@@ -59,6 +59,24 @@ to_utm = (lat, lon) ->
 
 
 parse = (input) ->
+
+
+	# here
+	re = /\s*here\s*/
+	m = re.exec(input)
+	if m
+		# this rule has a spetial treatment
+		navigator.geolocation.getCurrentPosition (location) ->
+			lat = location.coords.latitude
+			lon = location.coords.longitude
+			$('#coords').textinput().val(to_d(lat, lon))
+			$('#coords_d').textinput().val(to_d(lat, lon))
+			$('#coords_dm').textinput().val(to_dm(lat, lon))
+			$('#coords_dms').textinput().val(to_dms(lat, lon))
+			$('#coords_utm').textinput().val(to_utm(lat, lon))
+			$('#view').button('enable')
+		return null
+
 	# 42.53 -4.56
 	re = /\s*([-+]?\d+(\.(\d+)?)?)\s+([-+]?\d+(\.(\d+)?)?)\s*/
 	m = re.exec(input)
@@ -124,19 +142,6 @@ convert_button = ->
 		$('#coords_utm').textinput().val('')
 		$('#view').button('disable')
 
-
-init = ->
-	navigator.geolocation.getCurrentPosition (location) ->
-		lat = location.coords.latitude
-		lon = location.coords.longitude
-		$('#coords').textinput().val(to_d(lat, lon))
-		$('#coords_d').textinput().val(to_d(lat, lon))
-		$('#coords_dm').textinput().val(to_dm(lat, lon))
-		$('#coords_dms').textinput().val(to_dms(lat, lon))
-		$('#coords_utm').textinput().val(to_utm(lat, lon))
-		$('#view').button('enable')
-
-
 vell = ->
 	console.log input
 	console.log parse(input)
@@ -157,4 +162,5 @@ vell = ->
 	document.f.gps_d.value = to_d(lat, lon)
 	document.f.gps_dm.value = to_dm(lat, lon)
 	document.f.gps_dms.value = to_dms(lat, lon)
+
 

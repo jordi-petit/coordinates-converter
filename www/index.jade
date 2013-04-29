@@ -25,29 +25,55 @@ html
 
 	body
 
-		div(data-role='page', id='main')
-			div(data-role='header')
-				a(href='#info', data-icon='info', data-iconpos='notext') 
-				h1 Converter
-			div(data-role='content')		
-				p Coordinates:		
-				input(name='coords', id='coords', data-clear-btn='true', value='')
-				input(type='button', id='convert', name='convert', value='Convert', onclick='convert_button()')
-				br
-				input(name='coords_d', id='coords_d', value='')
-				input(name='coords_dm', id='coords_dm', value='')
-				input(name='coords_dms', id='coords_dms', value='')
-				input(name='coords_utm', id='coords_utm', value='')
-				input(type='button', id='view', name='view', value='View', disabled='disabled', onclick='view_button()')
-			script(type='text/javascript')
-				init()
 
-					
-		div(data-role='page', id='info')
+		div(data-role='page', id='main')
+
+			div(data-role='header')
+				h1 Converter
+
+			div(data-role='content')
+				ul(data-role='listview')
+					li
+						input(name='coords', id='coords', data-clear-btn='true', placeholder='Coordinates (app will guess their format!)')
+						input(type='button', id='convert', name='convert', value='Convert', onclick='convert_button()')
+					li
+						input(name='coords_d', id='coords_d', placeholder='Degrees')
+						input(name='coords_dm', id='coords_dm', placeholder='Degrees Minutes')
+						input(name='coords_dms', id='coords_dms', placeholder='Degrees Minutes Seconds')
+						input(name='coords_utm', id='coords_utm', placeholder='UTM - Not ready')
+						input(type='button', id='view', name='view', value='View', disabled='disabled', onclick='view_button()')
+
+			div(data-role='footer', data-position='fixed')
+				div(data-role='navbar')
+					ul
+						li 
+							a(href='#configuration', data-icon='gear') Config
+						li 
+							a(href='#formats', data-icon='info') Formats
+						li 
+							a(href='#about', data-icon='star') About
+
+
+
+		div(data-role='page', id='about')
 			div(data-role='header')
 				a(href='#', data-icon='back', data-iconpos='notext', data-rel='back') 
-				h1( style='overflow: visible !important;') GPS Coordinates Converter
+				h1 About
 			div(data-role='content')
-				p Hola
-				p Jordi
-				p Adeu
+				p Bla bla about
+
+
+		div(data-role='page', id='formats')
+			div(data-role='header')
+				a(href='#', data-icon='back', data-iconpos='notext', data-rel='back') 
+				h1 Formats
+			div(data-role='content')
+				p Bla bla formats
+
+
+		div(data-role='page', id='configuration')
+			div(data-role='header')
+				a(href='#', data-icon='back', data-iconpos='notext', data-rel='back') 
+				h1 Configuration
+			div(data-role='content')
+				p Bla bla configuration
