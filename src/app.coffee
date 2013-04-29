@@ -10,11 +10,11 @@ to_google = (lat, lon) ->
 
 	lat_pos = (if lat >= 0 then "N" else "S")
 	lat_deg = Math.abs(lat)
-	lat = lat_pos + " " + lat_deg.toFixed(digits) + ((if symbols then "°" else ""))
+	lat = lat_pos + " " + lat_deg.toFixed(digits) + (symbol "°")
 
 	lon_pos = (if lon >= 0 then "E" else "W")
 	lon_deg = Math.abs(lon)
-	lon = lon_pos + " " + lon_deg.toFixed(digits) + ((if symbols then "°" else ""))
+	lon = lon_pos + " " + lon_deg.toFixed(digits) + (symbol "°")
 
 	return lat + " " + lon
 
@@ -25,11 +25,11 @@ to_d = (lat, lon) ->
 
 	lat_pos = (if lat >= 0 then "N" else "S")
 	lat_deg = Math.abs(lat)
-	lat = lat_pos + " " + lat_deg.toFixed(digits) + ((if symbols then "°" else ""))
+	lat = lat_pos + " " + lat_deg.toFixed(digits) + (symbol "°")
 
 	lon_pos = (if lon >= 0 then "E" else "W")
 	lon_deg = Math.abs(lon)
-	lon = lon_pos + " " + lon_deg.toFixed(digits) + ((if symbols then "°" else ""))
+	lon = lon_pos + " " + lon_deg.toFixed(digits) + (symbol "°")
 
 	return lat + " " + lon
 
@@ -42,13 +42,13 @@ to_dm = (lat, lon) ->
 	lat = Math.abs(lat)
 	lat_deg = Math.floor(lat)
 	lat_min = 60 * (lat - lat_deg)
-	lat = lat_pos + " " + lat_deg + ((if symbols then "°" else "")) + " " + lat_min.toFixed(digits) + ((if symbols then "'" else ""))
+	lat = lat_pos + " " + lat_deg + (symbol "°") + " " + lat_min.toFixed(digits) + (symbol "'")
 
 	lon_pos = (if lon >= 0 then "E" else "W")
 	lon = Math.abs(lon)
 	lon_deg = Math.floor(lon)
 	lon_min = 60 * (lon - lon_deg)
-	lon = lon_pos + " " + lon_deg + ((if symbols then "°" else "")) + " " + lon_min.toFixed(digits) + ((if symbols then "'" else ""))
+	lon = lon_pos + " " + lon_deg + (symbol "°") + " " + lon_min.toFixed(digits) + (symbol "'")
 
 	return lat + " " + lon
 
@@ -63,7 +63,7 @@ to_dms = (lat, lon) ->
 	lat_min_f = 60 * (lat - lat_deg)
 	lat_min_i = Math.floor(lat_min_f)
 	lat_sec = 60 * (lat_min_f - lat_min_i)
-	lat = lat_pos + " " + lat_deg + ((if symbols then "°" else "")) + " " + lat_min_i + ((if symbols then "'" else "")) + " " + lat_sec.toFixed(digits) + ((if symbols then "\"" else ""))
+	lat = lat_pos + " " + lat_deg + (symbol "°") + " " + lat_min_i + (symbol "'") + " " + lat_sec.toFixed(digits) + (symbol "\"")
 
 	lon_pos = (if lon >= 0 then "E" else "W")
 	lon = Math.abs(lon)
@@ -71,7 +71,7 @@ to_dms = (lat, lon) ->
 	lon_min_f = 60 * (lon - lon_deg)
 	lon_min_i = Math.floor(lon_min_f)
 	lon_sec = 60 * (lon_min_f - lon_min_i)
-	lon = lon_pos + " " + lon_deg + ((if symbols then "°" else "")) + " " + lon_min_i + ((if symbols then "'" else "")) + " " + lon_sec.toFixed(digits) + ((if symbols then "\"" else ""))
+	lon = lon_pos + " " + lon_deg + (symbol "°") + " " + lon_min_i + (symbol "'") + " " + lon_sec.toFixed(digits) + (symbol "\"")
 
 	return lat + " " + lon
 
@@ -85,7 +85,7 @@ to_utm = (lat, lon) ->
 	LatLonToUTMXY DegToRad(lat), DegToRad(lon), zone, xy
 	emi = (if lat < 0 then "S" else "N")
 
-	return "UTM" + zone + emi + " " + xy[0].toFixed(digits) + ((if symbols then "," else "")) + " " + xy[1].toFixed(digits)
+	return "UTM" + zone + emi + " " + xy[0].toFixed(digits) + (symbol ",") + " " + xy[1].toFixed(digits)
 
 
 parse = (input) ->
@@ -198,3 +198,8 @@ slider_value = (id) ->
 
 print = (x) ->
 	console.log x
+
+
+symbol = (x) ->
+	if slider_value("#symbols") then x else ""
+
