@@ -1,3 +1,9 @@
+###
+Jordi Petit
+jordi.petit@gmail.com
+###
+
+
 to_google = (lat, lon) ->
 	digits = 10
 	symbols = 1
