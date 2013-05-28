@@ -166,7 +166,9 @@ view_button = ->
 	input = $("#coords").textinput().val().trim().toLowerCase()
 	res = parse input
 	if res
-		window.location = "https://maps.google.com/maps?hl=ca&q=" + to_google(res.lat, res.lon)
+		loc = "https://maps.google.com/maps?hl=ca&q=" + to_google(res.lat, res.lon)
+		#window.location = loc
+		window.open(loc, '_system');
 	else
 		print "cannot parse"
 

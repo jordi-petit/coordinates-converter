@@ -3,7 +3,7 @@
 		xmlns       = 'http://www.w3.org/ns/widgets'
 		xmlns:gap   = 'http://phonegap.com/ns/1.0'
 		id          = 'org.potipoti.coordinates-converter'
-		version     = '1.0.0'
+		version     = '2.7.0'
 	>
 
 	<name>
@@ -40,6 +40,9 @@
 	<access origin='http://maps.google.com' />
 	<access origin='https://google.com' />
 	<access origin='https://maps.google.com' />
+
+	<plugin name='InAppBrowser' value='org.apache.cordova.InAppBrowser' />
+	<access origin='*' browserOnly='true' />
 
  </widget>
 
