@@ -92,6 +92,7 @@ parse = (input) ->
 	re = /\s*here\s*/
 	m = re.exec(input)
 	if m
+		print "HERE"
 		navigator.geolocation.getCurrentPosition (location) ->
 			lat = location.coords.latitude
 			lon = location.coords.longitude
@@ -104,18 +105,37 @@ parse = (input) ->
 
 		return null
 
-	re = /\s*([-+]?\d+(\.(\d+)?)?)\s+([-+]?\d+(\.(\d+)?)?)\s*/
+
+	re = /UTM(\d+)\s*([ns])\s*(\d+)(\s+)(\d+)/
 	m = re.exec(input)
 	if m
-		print m
+		zone = parseInt m[1]
+		emis = m[2]
+		posx = parseInt m[3]
+		posy = parseInt m[5]
+		print "UTM", zone, emis, poss, posy
+
+		latlon = new Array(2)
+		UTMXYToLatLon posx, posy, zone, (emis is 's'), latlon
+		return (
+			lat: RadToDeg latlon[0]
+			lon: RadToDeg latlon[1]
+		)
+
+
+	re = /([-+]?\d+(\.(\d+)?)?)\s+([-+]?\d+(\.(\d+)?)?)/
+	m = re.exec(input)
+	if m
 		lat = parseFloat(m[1])
 		lon = parseFloat(m[4])
+
+		print "D", lat, lon
 		return (
 			lat: lat
 			lon: lon
 		)
 
-	re = /\s*([ns])\s*(\d+\.\d+)\s+([ew])\s*(\d+\.\d+)\s*/
+	re = /([ns])\s*(\d+\.\d+)\s+([ew])\s*(\d+\.\d+)/
 	m = re.exec(input)
 	if m
 		lat = parseFloat(m[2])
@@ -127,7 +147,7 @@ parse = (input) ->
 			lon: lon
 		)
 
-	re = /\s*([ew])\s*(\d+\.\d+)\s+([ns])\s*(\d+\.\d+)\s*/
+	re = /([ew])\s*(\d+\.\d+)\s+([ns])\s*(\d+\.\d+)/
 	m = re.exec(input)
 	if m
 		lat = parseFloat(m[4])
